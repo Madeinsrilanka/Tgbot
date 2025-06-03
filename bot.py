@@ -20,9 +20,9 @@ model = genai.GenerativeModel('gemini-pro')
 
 # Messages
 URL_PROMPT = "Give me movie url?"
-INVALID_URL = "This Url Type is Invalid"
+INVALID_URL = "This Url Type is Invalid 🔌/ Url එකක් ලබා දෙන්න 🔌"
 NOT_FOUND = "I can't find anything"
-MOVIE_PROMPT = "Please give me movie or TV show name"
+MOVIE_PROMPT = "Please give me movie or TV show name 📟"
 ERROR_MSG = "❗ error"
 
 # Track bot start time (for uptime)
@@ -100,7 +100,8 @@ Hello, 👋 *{full_name}*. ♥️
 💾 *Storage* : {get_system_storage()}  
 ⏰ *System Uptime* : {get_system_uptime()}  
 ⏱ *Bot Uptime* : {get_bot_uptime()}  
-🧠 *Gemini AI & Movie Download System*  
+🧠 *Gemini AI & Movie Download System* 
+🍎 *Coded by Shafeer Cassim*
 •──────────────────────────•  
 
 Do you have any questions? Send a message or type /help.
@@ -153,10 +154,10 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stats_msg = f"""
 🖥 *System Status*:
 
-• RAM: {get_system_ram()}
-• Storage: {get_system_storage()}
-• System Uptime: {get_system_uptime()}
-• Bot Uptime: {get_bot_uptime()}
+• 📟 RAM: {get_system_ram()}
+• 💾 Storage: {get_system_storage()}
+• ⏳ System Uptime: {get_system_uptime()}
+• ⚙️ Bot Uptime: {get_bot_uptime()}
 """
     await update.message.reply_text(stats_msg, parse_mode='Markdown')
 
@@ -186,7 +187,7 @@ async def search_movies(update: Update, context: ContextTypes.DEFAULT_TYPE):
         movies = result['result']['data']
         keyboard = []
         
-        text = "🔮 *MOVIE SEARCH RESULTS* 🔮\n\n📲 Input: *{query}*\n\n"
+        text = "🔮 *MOVIE SEARCH RESULTS* 🔮\n\n📲 Input: *{query}*\n\n".format(query=query)
         
         for idx, movie in enumerate(movies, 1):
             title = re.sub(r'Sinhala Subtitles \| සිංහල උපසිරැසි සමඟ|Sinhala Subtitle \| සිංහල උපසිරැසි සමඟ', '', movie['title'])
