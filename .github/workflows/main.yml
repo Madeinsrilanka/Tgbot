@@ -37,7 +37,7 @@ jobs:
 
     - name: Run linter
       run: |
-        pylint --disable=R,C,W1203,W1202 your_bot_file.py tests/
+        pylint --disable=R,C,W1203,W1202 bot.py tests/
 
   integration-test:
     needs: test
