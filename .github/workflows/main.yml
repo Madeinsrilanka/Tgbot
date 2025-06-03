@@ -1,0 +1,39 @@
+name: 6-Hour Bot Test
+
+on:
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  test-bot:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install psutil python-telegram-bot google-generativeai
+        
+    - name: Run bot with timeout
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: |
+        # Start bot in background
+        python bot.py &
+        BOT_PID=$!
+        
+        # Wait for 6 hours (21600 seconds)
+        sleep 21600
+        
+        # Kill the bot process
+        kill $BOT_PID
+        echo "Bot test completed after 6 hours"
